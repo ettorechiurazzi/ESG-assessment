@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pantaleo Brand Checker</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --olive:      #4A5C2F;
+      --olive-light:#EAF3DE;
+      --olive-mid:  #6B7F4A;
+      --dark:       #2C2C2A;
+      --cream:      #FAF8F4;
+      --border:     #E0DDD6;
+      --text:       #1A1A18;
+      --muted:      #6B6B65;
+      --ok:         #2D7A3A;
+      --ok-bg:      #E8F5EC;
+      --warn:       #B06A00;
+      --warn-bg:    #FFF4E0;
+      --fail:       #B72020;
+      --fail-bg:    #FDECEA;
+      --radius:     8px;
+      --shadow:     0 1px 4px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--dark);
+      color: #fff;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .avatar {
+      width: 34px; height: 34px;
+      background: var(--olive);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: #fff;
+      flex-shrink: 0;
+      letter-spacing: .5px;
+    }
+    header .label {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
+    header .sublabel {
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 1px;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ── Collapsible KB ── */
+    .collapsible-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      transition: background .15s;
+    }
+    .collapsible-header:hover { background: #f7f5f1; }
+    .collapsible-header span {
+      font-size: 13px; font-weight: 600; color: var(--dark);
+    }
+    .chevron {
+      font-size: 11px; color: var(--muted);
+      transition: transform .2s;
+      display: inline-block;
+    }
+    .chevron.open { transform: rotate(180deg); }
+    .collapsible-body {
+      display: none;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 16px;
+      margin-top: -16px;
+      margin-bottom: 16px;
+      max-height: 320px;
+      overflow-y: auto;
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--muted);
+      white-space: pre-wrap;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+    .collapsible-body.open { display: block; }
+
+    /* ── Tag selectors ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      font-size: 12.5px;
+      cursor: pointer;
+      transition: all .15s;
+      background: #fff;
+      color: var(--text);
+      user-select: none;
+      white-space: nowrap;
+    }
+    .tag:hover { border-color: var(--olive-mid); color: var(--olive); }
+    .tag.selected {
+      background: var(--olive-light);
+      border-color: var(--olive);
+      color: var(--olive);
+      font-weight: 600;
+    }
+
+    .products-hint {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 8px;
+      min-height: 16px;
+      font-style: italic;
+    }
+
+    /* ── Textarea ── */
+    .textarea-wrap { position: relative; }
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 13.5px;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 160px;
+      font-family: inherit;
+      color: var(--text);
+      background: #fff;
+      transition: border-color .15s;
+    }
+    textarea:focus { outline: none; border-color: var(--olive); }
+    .char-counter {
+      text-align: right;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    /* ── Button ── */
+    .btn-verify {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: var(--olive);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background .15s, opacity .15s;
+      margin-top: 4px;
+    }
+    .btn-verify:hover:not(:disabled) { background: var(--olive-mid); }
+    .btn-verify:disabled { opacity: .55; cursor: not-allowed; }
+
+    /* ── Loading ── */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .loading.visible { display: block; }
+    .spinner {
+      display: inline-block;
+      width: 22px; height: 22px;
+      border: 2.5px solid var(--border);
+      border-top-color: var(--olive);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Error ── */
+    .error-box {
+      display: none;
+      background: var(--fail-bg);
+      border: 1px solid #f5bfbf;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      color: var(--fail);
+      font-size: 13px;
+      margin-top: 16px;
+    }
+    .error-box.visible { display: block; }
+
+    /* ── Results ── */
+    #results { display: none; }
+    #results.visible { display: block; }
+
+    /* Verdict bar */
+    .verdict-bar {
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .verdict-bar.ok   { background: var(--ok-bg);   color: var(--ok);   border: 1px solid #a8d5b0; }
+    .verdict-bar.warn { background: var(--warn-bg);  color: var(--warn); border: 1px solid #f5d08a; }
+    .verdict-bar.fail { background: var(--fail-bg);  color: var(--fail); border: 1px solid #f5bfbf; }
+    .verdict-icon { font-size: 20px; }
+    .verdict-text { flex: 1; }
+    .verdict-label {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      opacity: .75;
+    }
+
+    /* Dimension cards */
+    .dim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .dim-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+    .dim-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .dim-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+    .pill.ok   { background: var(--ok-bg);   color: var(--ok);   }
+    .pill.warn { background: var(--warn-bg);  color: var(--warn); }
+    .pill.fail { background: var(--fail-bg);  color: var(--fail); }
+    .dim-note {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .issue {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+    .issue-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .issue-dot.ok   { background: var(--ok);   }
+    .issue-dot.warn { background: var(--warn);  }
+    .issue-dot.fail { background: var(--fail);  }
+
+    /* ── Proposal section ── */
+    .proposal-collapsible {
+      margin-top: 24px;
+    }
+    .proposal-body {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      display: none;
+      box-shadow: var(--shadow);
+    }
+    .proposal-body.open { display: block; }
+    .field-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+      margin-top: 14px;
+    }
+    .field-label:first-child { margin-top: 0; }
+    .btn-propose {
+      margin-top: 14px;
+      padding: 10px 20px;
+      background: var(--olive);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-propose:hover:not(:disabled) { background: var(--olive-mid); }
+    .btn-propose:disabled { opacity: .55; cursor: not-allowed; }
+    .propose-feedback {
+      font-size: 12.5px;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      display: none;
+    }
+    .propose-feedback.ok   { background: var(--ok-bg);   color: var(--ok);   display:block; }
+    .propose-feedback.fail { background: var(--fail-bg);  color: var(--fail); display:block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 500px) {
+      .container { padding: 16px 12px 48px; }
+      .dim-grid { grid-template-columns: 1fr; }
+      header .sublabel { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="avatar">NP</div>
+  <div>
+    <div class="label">Pantaleo Brand Checker</div>
+    <div class="sublabel">Uso interno Véritable</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- KB section -->
+  <div class="collapsible-header" id="kbToggle">
+    <span>📚 Visualizza knowledge base</span>
+    <span class="chevron" id="kbChevron">▼</span>
+  </div>
+  <div class="collapsible-body" id="kbBody">Caricamento…</div>
+
+  <!-- Main form card -->
+  <div class="card">
+
+    <!-- Format -->
+    <div class="card-title">Formato</div>
+    <div class="tags" id="formatTags">
+      <span class="tag" data-value="Post social">Post social</span>
+      <span class="tag" data-value="Ads">Ads</span>
+      <span class="tag" data-value="Blog post">Blog post</span>
+      <span class="tag" data-value="Scheda prodotto">Scheda prodotto</span>
+      <span class="tag" data-value="Newsletter">Newsletter</span>
+      <span class="tag" data-value="Didascalia">Didascalia</span>
+      <span class="tag" data-value="Altro">Altro</span>
+    </div>
+
+    <!-- Products -->
+    <div class="card-title" style="margin-top:20px;">Prodotti citati <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;">(selezione multipla)</span></div>
+    <div class="tags" id="productTags">
+      <span class="tag" data-value="IGP Olio di Puglia">IGP Olio di Puglia</span>
+      <span class="tag" data-value="Biologico">Biologico</span>
+      <span class="tag" data-value="100% Italiano">100% Italiano</span>
+      <span class="tag" data-value="Selezione Oro">Selezione Oro</span>
+      <span class="tag" data-value="Rusticano">Rusticano</span>
+      <span class="tag" data-value="OroNovo">OroNovo</span>
+      <span class="tag" data-value="Bio Young">Bio Young</span>
+      <span class="tag" data-value="Zero">Zero</span>
+      <span class="tag" data-value="Aromatizzato">Aromatizzato</span>
+      <span class="tag" data-value="Squeezable">Squeezable</span>
+      <span class="tag" data-value="Generico/brand">Generico/brand</span>
+    </div>
+    <div class="products-hint" id="productsHint">Nessun prodotto selezionato</div>
+
+    <!-- Content -->
+    <div class="card-title" style="margin-top:20px;">Contenuto da verificare</div>
+    <div class="textarea-wrap">
+      <textarea id="contentInput" placeholder="Incolla qui il testo da verificare…" rows="7" spellcheck="false"></textarea>
+    </div>
+    <div class="char-counter"><span id="charCount">0</span> caratteri</div>
+
+    <button class="btn-verify" id="verifyBtn" onclick="verify()">
+      Verifica coerenza brand
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <span class="spinner"></span> Analisi in corso…
+  </div>
+
+  <!-- Error -->
+  <div class="error-box" id="errorBox"></div>
+
+  <!-- Results -->
+  <div id="results">
+    <div class="verdict-bar" id="verdictBar">
+      <span class="verdict-icon" id="verdictIcon"></span>
+      <div class="verdict-text">
+        <div class="verdict-label" id="verdictLabel"></div>
+        <div id="verdictSummary"></div>
+      </div>
+    </div>
+    <div class="dim-grid" id="dimGrid"></div>
+  </div>
+
+  <!-- Proposal section -->
+  <div class="proposal-collapsible" id="proposalSection">
+    <div class="collapsible-header" id="propToggle" style="margin-bottom:0;">
+      <span>💡 Proponi aggiornamento alla knowledge base</span>
+      <span class="chevron" id="propChevron">▼</span>
+    </div>
+    <div class="proposal-body" id="propBody">
+      <div class="field-label">Tipo di aggiornamento</div>
+      <div class="tags" id="proposalTypeTags">
+        <span class="tag" data-value="Nuovo prodotto">Nuovo prodotto</span>
+        <span class="tag" data-value="Nuovo impiego">Nuovo impiego</span>
+        <span class="tag" data-value="Claim approvato">Claim approvato</span>
+        <span class="tag" data-value="Claim vietato">Claim vietato</span>
+        <span class="tag" data-value="Premio">Premio</span>
+        <span class="tag" data-value="Certificazione">Certificazione</span>
+        <span class="tag" data-value="Correzione">Correzione</span>
+        <span class="tag" data-value="Altro">Altro</span>
+      </div>
+      <div class="field-label">Descrizione</div>
+      <textarea id="proposalText" placeholder="Descrivi la modifica proposta…" rows="4"></textarea>
+      <button class="btn-propose" id="proposeBtn" onclick="submitProposal()">Invia proposta</button>
+      <div class="propose-feedback" id="proposeFeedback"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── State ──────────────────────────────────────────────────────────────────
+  let selectedFormat = null;
+  const selectedProducts = new Set();
+  let selectedProposalType = null;
+
+  // ── KB collapsible ─────────────────────────────────────────────────────────
+  let kbLoaded = false;
+  document.getElementById('kbToggle').addEventListener('click', async () => {
+    const body = document.getElementById('kbBody');
+    const chevron = document.getElementById('kbChevron');
+    const isOpen = body.classList.toggle('open');
+    chevron.classList.toggle('open', isOpen);
+
+    if (isOpen && !kbLoaded) {
+      try {
+        const r = await fetch('/api/kb');
+        const d = await r.json();
+        body.textContent = d.content;
+        kbLoaded = true;
+      } catch {
+        body.textContent = 'Errore nel caricamento della knowledge base.';
+      }
+    }
+  });
+
+  // ── Proposal collapsible ───────────────────────────────────────────────────
+  document.getElementById('propToggle').addEventListener('click', () => {
+    const body = document.getElementById('propBody');
+    const chevron = document.getElementById('propChevron');
+    const isOpen = body.classList.toggle('open');
+    chevron.classList.toggle('open', isOpen);
+  });
+
+  // ── Format tags (single select) ────────────────────────────────────────────
+  document.getElementById('formatTags').addEventListener('click', e => {
+    const tag = e.target.closest('.tag');
+    if (!tag) return;
+    document.querySelectorAll('#formatTags .tag').forEach(t => t.classList.remove('selected'));
+    if (selectedFormat === tag.dataset.value) {
+      selectedFormat = null;
+    } else {
+      tag.classList.add('selected');
+      selectedFormat = tag.dataset.value;
+    }
+  });
+
+  // ── Product tags (multi select) ────────────────────────────────────────────
+  document.getElementById('productTags').addEventListener('click', e => {
+    const tag = e.target.closest('.tag');
+    if (!tag) return;
+    const val = tag.dataset.value;
+    if (selectedProducts.has(val)) {
+      selectedProducts.delete(val);
+      tag.classList.remove('selected');
+    } else {
+      selectedProducts.add(val);
+      tag.classList.add('selected');
+    }
+    updateProductsHint();
+  });
+
+  function updateProductsHint() {
+    const hint = document.getElementById('productsHint');
+    if (selectedProducts.size === 0) {
+      hint.textContent = 'Nessun prodotto selezionato';
+    } else {
+      hint.textContent = 'Selezionati: ' + [...selectedProducts].join(', ');
+    }
+  }
+
+  // ── Proposal type tags (single select) ────────────────────────────────────
+  document.getElementById('proposalTypeTags').addEventListener('click', e => {
+    const tag = e.target.closest('.tag');
+    if (!tag) return;
+    document.querySelectorAll('#proposalTypeTags .tag').forEach(t => t.classList.remove('selected'));
+    if (selectedProposalType === tag.dataset.value) {
+      selectedProposalType = null;
+    } else {
+      tag.classList.add('selected');
+      selectedProposalType = tag.dataset.value;
+    }
+  });
+
+  // ── Char counter ───────────────────────────────────────────────────────────
+  document.getElementById('contentInput').addEventListener('input', e => {
+    document.getElementById('charCount').textContent = e.target.value.length;
+  });
+
+  // ── Verify ─────────────────────────────────────────────────────────────────
+  async function verify() {
+    const content = document.getElementById('contentInput').value.trim();
+
+    if (!selectedFormat) { showError('Seleziona il formato del contenuto.'); return; }
+    if (!content) { showError('Incolla il testo da verificare.'); return; }
+
+    setLoading(true);
+    clearError();
+    hideResults();
+
+    try {
+      const r = await fetch('/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          format: selectedFormat,
+          products: [...selectedProducts],
+          content
+        })
+      });
+
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({ detail: 'Errore sconosciuto.' }));
+        throw new Error(err.detail || `HTTP ${r.status}`);
+      }
+
+      const data = await r.json();
+      renderResults(data);
+
+    } catch (e) {
+      showError('Errore durante la verifica: ' + e.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function renderResults(data) {
+    const verdict = data.verdict || 'warn';
+    const icons   = { ok: '✅', warn: '⚠️', fail: '❌' };
+    const labels  = { ok: 'Conforme', warn: 'Da rivedere', fail: 'Non conforme' };
+
+    const bar = document.getElementById('verdictBar');
+    bar.className = 'verdict-bar ' + verdict;
+    document.getElementById('verdictIcon').textContent = icons[verdict] || '⚠️';
+    document.getElementById('verdictLabel').textContent = labels[verdict] || verdict;
+    document.getElementById('verdictSummary').textContent = data.summary || '';
+
+    const grid = document.getElementById('dimGrid');
+    grid.innerHTML = '';
+
+    (data.dimensions || []).forEach(dim => {
+      const pillLabel = { ok: 'Conforme', warn: 'Da rivedere', fail: 'Non conforme' };
+      const issues = (dim.issues || []).map(issue => `
+        <div class="issue">
+          <span class="issue-dot ${issue.level || 'warn'}"></span>
+          <span>${escHtml(issue.text)}</span>
+        </div>
+      `).join('');
+
+      grid.innerHTML += `
+        <div class="dim-card">
+          <div class="dim-header">
+            <div class="dim-name">${escHtml(dim.name)}</div>
+            <span class="pill ${dim.status}">${pillLabel[dim.status] || dim.status}</span>
+          </div>
+          <div class="dim-note">${escHtml(dim.note)}</div>
+          ${issues}
+        </div>
+      `;
+    });
+
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── Propose ────────────────────────────────────────────────────────────────
+  async function submitProposal() {
+    const text = document.getElementById('proposalText').value.trim();
+    const fb   = document.getElementById('proposeFeedback');
+    fb.className = 'propose-feedback';
+    fb.style.display = 'none';
+
+    if (!selectedProposalType) { fb.className = 'propose-feedback fail'; fb.textContent = 'Seleziona il tipo di aggiornamento.'; return; }
+    if (!text) { fb.className = 'propose-feedback fail'; fb.textContent = 'Scrivi una descrizione della proposta.'; return; }
+
+    const btn = document.getElementById('proposeBtn');
+    btn.disabled = true;
+    btn.textContent = 'Invio…';
+
+    try {
+      const r = await fetch('/propose', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: selectedProposalType, text })
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.detail || 'Errore.');
+      fb.className = 'propose-feedback ok';
+      fb.textContent = d.message || 'Proposta salvata.';
+      document.getElementById('proposalText').value = '';
+      document.querySelectorAll('#proposalTypeTags .tag').forEach(t => t.classList.remove('selected'));
+      selectedProposalType = null;
+    } catch (e) {
+      fb.className = 'propose-feedback fail';
+      fb.textContent = 'Errore: ' + e.message;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Invia proposta';
+    }
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  function setLoading(on) {
+    document.getElementById('loading').classList.toggle('visible', on);
+    document.getElementById('verifyBtn').disabled = on;
+  }
+  function showError(msg) {
+    const box = document.getElementById('errorBox');
+    box.textContent = msg;
+    box.classList.add('visible');
+  }
+  function clearError() {
+    document.getElementById('errorBox').classList.remove('visible');
+  }
+  function hideResults() {
+    document.getElementById('results').classList.remove('visible');
+  }
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+
+</body>
+</html>
