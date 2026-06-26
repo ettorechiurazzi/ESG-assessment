@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pantaleo Brand Checker</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --olive: #4A5C2F;
+    --olive-hover: #3a4a24;
+    --olive-bg: #EAF3DE;
+    --dark: #2C2C2A;
+    --cream: #FAF8F4;
+    --border: #E0DDD6;
+    --text: #1a1a18;
+    --muted: #6b6860;
+
+    --ok-bg: #EAF3DE;
+    --ok-fg: #27500A;
+    --warn-bg: #FAEEDA;
+    --warn-fg: #633806;
+    --fail-bg: #FCEBEB;
+    --fail-fg: #791F1F;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .avatar svg { width: 20px; height: 20px; fill: #fff; }
+
+  .header-text { line-height: 1.2; }
+  .header-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.01em;
+  }
+  .header-sub {
+    font-size: 11.5px;
+    color: #aaa9a4;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* CARD */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    background: #fdfcfa;
+  }
+
+  .card-body { padding: 18px; }
+
+  /* COLLAPSIBLE */
+  .collapsible-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: #fdfcfa;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+    border-bottom: 1px solid transparent;
+    transition: background 0.15s;
+  }
+  .collapsible-trigger:hover { background: #f5f3ef; }
+  .collapsible-trigger.open { border-bottom-color: var(--border); }
+
+  .chevron {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s;
+    color: var(--muted);
+  }
+  .open .chevron { transform: rotate(180deg); }
+
+  .collapsible-body {
+    display: none;
+    padding: 18px;
+  }
+  .collapsible-body.open { display: block; }
+
+  /* KNOWLEDGE BASE */
+  .kb-content {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #3a3a38;
+    white-space: pre-wrap;
+  }
+
+  /* TAGS */
+  .tag-group { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 13px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: #fff;
+    color: var(--text);
+    user-select: none;
+    white-space: nowrap;
+  }
+  .tag:hover { border-color: var(--olive); color: var(--olive); }
+  .tag.selected {
+    background: var(--olive-bg);
+    border-color: var(--olive);
+    color: var(--olive);
+    font-weight: 500;
+  }
+
+  .products-hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    min-height: 18px;
+  }
+  .products-hint strong { color: var(--olive); }
+
+  /* TEXTAREA */
+  .textarea-wrap { position: relative; }
+  textarea {
+    width: 100%;
+    min-height: 160px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    font-family: inherit;
+    color: var(--text);
+    background: #fff;
+    resize: vertical;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  textarea:focus { border-color: var(--olive); }
+
+  .char-counter {
+    text-align: right;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .char-counter.warn { color: var(--warn-fg); }
+
+  /* BUTTON */
+  .btn-verify {
+    width: 100%;
+    padding: 13px;
+    background: var(--olive);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.01em;
+  }
+  .btn-verify:hover:not(:disabled) { background: var(--olive-hover); }
+  .btn-verify:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* SPINNER */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  .loading .spinner { display: block; }
+  .loading .btn-text { display: none; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ERROR */
+  .error-box {
+    display: none;
+    background: var(--fail-bg);
+    border: 1px solid #f5c6c6;
+    border-radius: 8px;
+    padding: 13px 16px;
+    font-size: 13.5px;
+    color: var(--fail-fg);
+  }
+  .error-box.visible { display: block; }
+
+  /* RESULTS */
+  #results { display: none; }
+  #results.visible { display: flex; flex-direction: column; gap: 16px; }
+
+  /* VERDICT BAR */
+  .verdict-bar {
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .verdict-bar.ok { background: var(--ok-bg); color: var(--ok-fg); }
+  .verdict-bar.warn { background: var(--warn-bg); color: var(--warn-fg); }
+  .verdict-bar.fail { background: var(--fail-bg); color: var(--fail-fg); }
+
+  .verdict-icon { font-size: 26px; flex-shrink: 0; }
+  .verdict-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .verdict-summary { font-size: 16px; font-weight: 600; }
+
+  /* DIMENSION CARDS */
+  .dim-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .dim-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+
+  .dim-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
+  }
+
+  .dim-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .pill {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+  .pill.ok { background: var(--ok-bg); color: var(--ok-fg); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-fg); }
+  .pill.fail { background: var(--fail-bg); color: var(--fail-fg); }
+
+  .dim-note {
+    font-size: 13.5px;
+    color: #3a3a38;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .dim-issues { display: flex; flex-direction: column; gap: 6px; }
+
+  .issue-item {
+    font-size: 12.5px;
+    line-height: 1.5;
+    padding: 7px 11px;
+    border-radius: 6px;
+    border-left: 3px solid;
+  }
+  .issue-item.ok {
+    background: var(--ok-bg);
+    border-color: var(--ok-fg);
+    color: var(--ok-fg);
+  }
+  .issue-item.warn {
+    background: var(--warn-bg);
+    border-color: #d07a30;
+    color: var(--warn-fg);
+  }
+  .issue-item.fail {
+    background: var(--fail-bg);
+    border-color: #c44040;
+    color: var(--fail-fg);
+  }
+
+  /* PROPOSE */
+  .propose-section { margin-top: 4px; }
+
+  .propose-row {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .propose-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .btn-propose {
+    align-self: flex-start;
+    padding: 9px 22px;
+    background: var(--olive);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-propose:hover:not(:disabled) { background: var(--olive-hover); }
+  .btn-propose:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .propose-success {
+    display: none;
+    color: var(--ok-fg);
+    font-size: 13px;
+    background: var(--ok-bg);
+    padding: 10px 14px;
+    border-radius: 7px;
+  }
+  .propose-success.visible { display: block; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+  @media (max-width: 600px) {
+    .container { padding: 16px 12px 50px; }
+    .verdict-summary { font-size: 14px; }
+    .dim-name { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="avatar">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C9.5 2 8 4 8 6c0 1.5.7 2.8 1.8 3.6C7.5 10.5 6 12.8 6 15.5V20h12v-4.5c0-2.7-1.5-5-3.8-5.9C15.3 8.8 16 7.5 16 6c0-2-1.5-4-4-4zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 7c2.2 0 4 1.8 4 4V18H8v-3c0-2.2 1.8-4 4-4z"/>
+    </svg>
+  </div>
+  <div class="header-text">
+    <div class="header-title">Pantaleo Brand Checker</div>
+    <div class="header-sub">Uso interno Véritable</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- KNOWLEDGE BASE -->
+  <div class="card">
+    <button class="collapsible-trigger" onclick="toggleCollapsible(this)">
+      Visualizza knowledge base
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="collapsible-body">
+      <pre class="kb-content">IDENTITÀ: Nicola Pantaleo S.p.A., Fasano di Puglia (BR), dal 1890. 4 generazioni. 150 ettari uliveti propri. 30 mercati.
+Certificazioni: IGP Olio di Puglia (solo prodotto IGP), IFS Food, Biologico ICEA, Kosher, Halal, ISO 9001.
+
+GAMMA PRODOTTI:
+• IGP Olio di Puglia — certificato IGP, polifenoli totali ≥300ppm, biofenoli ≥250ppm, uso crudo e cucina pregiata
+• Biologico 100% Italiano — certificato bio ICEA, "secondo natura"
+• 100% Italiano — selezione oli italiani pregiati, crudo e cottura
+• Selezione Oro — olive più pregiate, uso crudo privilegiato
+• Rusticano — "bontà dell'olio appena franto", carattere rustico e intenso
+• OroNovo — "carattere fresco e deciso"
+• Bio Young — biologico 250ml, famiglie e bambini
+• Zero — estratto a freddo, senza pesticidi residui (unico per cui "estratto a freddo" è differenziante)
+• Aromatizzati — limone, peperoncino, agrumi, tartufo nero, basilico, aglio
+• Squeezable/Squeeze Me — 750ml e 500ml
+
+CLAIM VIETATI: "prima spremitura", "spremuto a freddo" (solo per Zero va bene), "light", "dietetico", superlativi assoluti non documentati, IGP attribuita a prodotti non IGP.
+
+VOCABOLARIO APPROVATO: fruttato, pungente, amaro, retrogusto di carciofo crudo, floreale, armonico, corposo, genuino, delicato, mandorlato, erbaceo. Heritage: "dal 1890", "quattro generazioni", "terra di Puglia", "Fasano".
+
+IMPIEGHI: EVO Pantaleo resiste fino a 180°C. IGP/premium → crudo. Rusticano/classico → cottura. Bio Young → famiglie/bambini.
+Aromatizzati: basilico→pasta; limone→pesce; aglio→bruschette; tartufo→risotti; agrumi→pesce/crudité; peperoncino→sughi.
+
+TONO: autorevole ma accessibile, prima persona plurale, nessuna enfasi promozionale vuota, radici pugliesi esplicite.</pre>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="card">
+    <div class="card-header">Contenuto da verificare</div>
+    <div class="card-body" style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- FORMATO -->
+      <div>
+        <div class="section-label">Formato</div>
+        <div class="tag-group" id="formato-tags">
+          <div class="tag" data-group="formato" onclick="selectSingle(this)">Post social</div>
+          <div class="tag" data-group="formato" onclick="selectSingle(this)">Ads</div>
+          <div class="tag" data-group="formato" onclick="selectSingle(this)">Blog post</div>
+          <div class="tag" data-group="formato" onclick="selectSingle(this)">Scheda prodotto</div>
+          <div class="tag" data-group="formato" onclick="selectSingle(this)">Newsletter</div>
+          <div class="tag" data-group="formato" onclick="selectSingle(this)">Didascalia</div>
+          <div class="tag" data-group="formato" onclick="selectSingle(this)">Altro</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- PRODOTTI -->
+      <div>
+        <div class="section-label">Prodotti (selezione multipla)</div>
+        <div class="tag-group" id="prodotti-tags">
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">IGP Olio di Puglia</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Biologico</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">100% Italiano</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Selezione Oro</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Rusticano</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">OroNovo</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Bio Young</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Zero</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Aromatizzato</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Squeezable</div>
+          <div class="tag" data-group="prodotto" onclick="toggleMulti(this)">Generico/brand</div>
+        </div>
+        <div class="products-hint" id="products-hint">Nessun prodotto selezionato</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- CONTENUTO -->
+      <div>
+        <div class="section-label">Contenuto</div>
+        <div class="textarea-wrap">
+          <textarea
+            id="contenuto"
+            placeholder="Incolla qui il testo da verificare..."
+            oninput="updateCounter(this)"
+            maxlength="8000"
+          ></textarea>
+        </div>
+        <div class="char-counter" id="char-counter">0 / 8000 caratteri</div>
+      </div>
+
+      <!-- ERROR -->
+      <div class="error-box" id="error-box"></div>
+
+      <!-- BUTTON -->
+      <button class="btn-verify" id="verify-btn" onclick="runVerify()">
+        <div class="spinner"></div>
+        <span class="btn-text">Verifica coerenza brand</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+
+    <!-- VERDICT BAR -->
+    <div class="verdict-bar" id="verdict-bar">
+      <div class="verdict-icon" id="verdict-icon"></div>
+      <div>
+        <div class="verdict-label" id="verdict-label"></div>
+        <div class="verdict-summary" id="verdict-summary"></div>
+      </div>
+    </div>
+
+    <!-- DIMENSIONS -->
+    <div class="card">
+      <div class="card-header">Analisi per dimensione</div>
+      <div class="card-body">
+        <div class="dim-grid" id="dim-grid"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROPOSE UPDATE -->
+  <div class="card propose-section">
+    <button class="collapsible-trigger" onclick="toggleCollapsible(this)">
+      Proponi aggiornamento alla knowledge base
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="collapsible-body">
+      <div class="propose-row">
+
+        <div>
+          <span class="propose-label">Tipo di aggiornamento</span>
+          <div class="tag-group" id="propose-tipo-tags">
+            <div class="tag selected" data-group="propose-tipo" onclick="selectSingle(this)">Nuovo claim approvato</div>
+            <div class="tag" data-group="propose-tipo" onclick="selectSingle(this)">Claim da vietare</div>
+            <div class="tag" data-group="propose-tipo" onclick="selectSingle(this)">Nuovo prodotto</div>
+            <div class="tag" data-group="propose-tipo" onclick="selectSingle(this)">Aggiornamento impieghi</div>
+            <div class="tag" data-group="propose-tipo" onclick="selectSingle(this)">Correzione errore</div>
+            <div class="tag" data-group="propose-tipo" onclick="selectSingle(this)">Altro</div>
+          </div>
+        </div>
+
+        <div>
+          <span class="propose-label">Descrivi la proposta</span>
+          <textarea
+            id="propose-text"
+            placeholder="Descrivi cosa vorresti aggiungere, modificare o correggere nella knowledge base..."
+            style="min-height:100px;"
+          ></textarea>
+        </div>
+
+        <div class="propose-success" id="propose-success">
+          Proposta salvata. Grazie per il contributo!
+        </div>
+
+        <button class="btn-propose" onclick="submitPropose()">Invia proposta</button>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ---- COLLAPSIBLE ----
+  function toggleCollapsible(trigger) {
+    trigger.classList.toggle('open');
+    const body = trigger.nextElementSibling;
+    body.classList.toggle('open');
+  }
+
+  // ---- TAG SINGLE SELECT ----
+  function selectSingle(el) {
+    const group = el.dataset.group;
+    document.querySelectorAll(`.tag[data-group="${group}"]`).forEach(t => t.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ---- TAG MULTI SELECT ----
+  function toggleMulti(el) {
+    el.classList.toggle('selected');
+    updateProductsHint();
+  }
+
+  function updateProductsHint() {
+    const selected = [...document.querySelectorAll('#prodotti-tags .tag.selected')].map(t => t.textContent.trim());
+    const hint = document.getElementById('products-hint');
+    if (selected.length === 0) {
+      hint.innerHTML = 'Nessun prodotto selezionato';
+    } else {
+      hint.innerHTML = `Selezionati: <strong>${selected.join(', ')}</strong>`;
+    }
+  }
+
+  // ---- CHAR COUNTER ----
+  function updateCounter(el) {
+    const len = el.value.length;
+    const counter = document.getElementById('char-counter');
+    counter.textContent = `${len.toLocaleString('it-IT')} / 8.000 caratteri`;
+    counter.classList.toggle('warn', len > 6000);
+  }
+
+  // ---- VERIFY ----
+  async function runVerify() {
+    const formato = document.querySelector('#formato-tags .tag.selected')?.textContent.trim() || 'Non specificato';
+    const prodotti = [...document.querySelectorAll('#prodotti-tags .tag.selected')].map(t => t.textContent.trim());
+    const contenuto = document.getElementById('contenuto').value.trim();
+
+    const errorBox = document.getElementById('error-box');
+    errorBox.classList.remove('visible');
+
+    if (!contenuto) {
+      showError('Inserisci il testo da verificare prima di procedere.');
+      return;
+    }
+
+    const btn = document.getElementById('verify-btn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    document.getElementById('results').classList.remove('visible');
+
+    try {
+      const res = await fetch('/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formato, prodotti, contenuto }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: `Errore ${res.status}` }));
+        throw new Error(err.detail || `Errore ${res.status}`);
+      }
+
+      const data = await res.json();
+      renderResults(data);
+
+    } catch (e) {
+      showError(e.message || 'Si è verificato un errore imprevisto. Riprova.');
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  }
+
+  function showError(msg) {
+    const box = document.getElementById('error-box');
+    box.textContent = msg;
+    box.classList.add('visible');
+  }
+
+  // ---- RENDER RESULTS ----
+  const VERDICT_ICONS = { ok: '✅', warn: '⚠️', fail: '❌' };
+  const VERDICT_LABELS = { ok: 'Contenuto approvato', warn: 'Attenzione richiesta', fail: 'Modifiche necessarie' };
+
+  function renderResults(data) {
+    const verdict = data.verdict || 'warn';
+
+    // Verdict bar
+    const bar = document.getElementById('verdict-bar');
+    bar.className = `verdict-bar ${verdict}`;
+    document.getElementById('verdict-icon').textContent = VERDICT_ICONS[verdict] || '⚠️';
+    document.getElementById('verdict-label').textContent = VERDICT_LABELS[verdict] || '';
+    document.getElementById('verdict-summary').textContent = data.summary || '';
+
+    // Dimensions
+    const grid = document.getElementById('dim-grid');
+    grid.innerHTML = '';
+
+    (data.dimensions || []).forEach(dim => {
+      const card = document.createElement('div');
+      card.className = 'dim-card';
+
+      const issues = (dim.issues || []).map(issue => `
+        <div class="issue-item ${issue.level || 'ok'}">${escHtml(issue.text)}</div>
+      `).join('');
+
+      card.innerHTML = `
+        <div class="dim-header">
+          <div class="dim-name">${escHtml(dim.name)}</div>
+          <div class="pill ${dim.status || 'ok'}">${(dim.status || 'ok').toUpperCase()}</div>
+        </div>
+        <div class="dim-note">${escHtml(dim.note || '')}</div>
+        ${issues ? `<div class="dim-issues">${issues}</div>` : ''}
+      `;
+      grid.appendChild(card);
+    });
+
+    const results = document.getElementById('results');
+    results.classList.add('visible');
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ---- PROPOSE ----
+  async function submitPropose() {
+    const tipo = document.querySelector('#propose-tipo-tags .tag.selected')?.textContent.trim() || 'Altro';
+    const testo = document.getElementById('propose-text').value.trim();
+    const successEl = document.getElementById('propose-success');
+    successEl.classList.remove('visible');
+
+    if (!testo) {
+      alert('Inserisci il testo della proposta.');
+      return;
+    }
+
+    const btn = document.querySelector('.btn-propose');
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso…';
+
+    try {
+      const res = await fetch('/propose', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tipo, testo }),
+      });
+      if (!res.ok) throw new Error('Errore nel salvataggio');
+      document.getElementById('propose-text').value = '';
+      successEl.classList.add('visible');
+    } catch (e) {
+      alert('Errore durante il salvataggio. Riprova.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Invia proposta';
+    }
+  }
+</script>
+</body>
+</html>
