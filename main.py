@@ -65,26 +65,34 @@ RICETTE BLOG — categorie: Antipasti e zuppe, Primi, Secondi e piatti unici, Do
 
 ANTI-GREENWASHING: non usare "sostenibile" senza pratiche documentate, non inventare premi, non attribuire proprietà mediche assolute.
 
-CONFORMITÀ NORMATIVA — D.Lgs. 162/2024 (Green Claims) e Codice del Consumo aggiornato:
+CONFORMITÀ NORMATIVA — D.Lgs. 20 febbraio 2026, n. 30 (Codice del Consumo aggiornato):
 
-D.Lgs. 162/2024 (recepimento Direttiva UE 2024/825/UE "Empowering Consumers for Green Transition") — in vigore:
-- VIETATI i claim ambientali generici privi di prova verificabile e certificazione di terza parte riconosciuta: "sostenibile", "eco-friendly", "verde", "naturale", "a basso impatto ambientale", "rispettoso del clima", "biodegradabile", "carbon neutral", "a emissioni zero", "rispettoso della natura" e locuzioni equivalenti.
-- Ogni claim di sostenibilità deve essere: specifico (riferito a un aspetto preciso del prodotto o processo), verificabile (basato su evidenza scientifica o dati misurabili), certificato da ente accreditato o schema ufficiale riconosciuto dall'UE o dalle autorità nazionali.
-- Le etichette volontarie di sostenibilità non approvate da schemi pubblici o riconosciuti sono vietate (art. 6-bis Direttiva 2005/29/CE come modificata).
-- Impegni futuri sull'ambiente (es. "entro il 2030 saremo carbon neutral") sono illeciti se non accompagnati da piano chiaro, misurabile, verificabile e reso pubblico.
-- Claim comparativi ambientali (es. "più sostenibile di X") richiedono prove documentate e metodo di confronto trasparente.
+D.Lgs. 20 febbraio 2026, n. 30 (recepimento Direttiva UE 2024/825/UE "Empowering Consumers for Green Transition") — modifica il Codice del Consumo D.Lgs. 206/2005. In vigore dal 27 settembre 2026.
 
-Codice del Consumo (D.Lgs. 206/2005 e successive modificazioni):
-- Art. 21 (Azioni ingannevoli): vietate affermazioni false o idonee a indurre in errore anche per omissione, incluse quelle su caratteristiche ambientali o sociali del prodotto.
-- Art. 22 (Omissioni rilevanti): omettere informazioni decisive che modificherebbero la scelta del consumatore medio è pratica commerciale scorretta.
-- Art. 23 lett. (a): sono in ogni caso ingannevoli le affermazioni di aderenza a un codice di condotta che il professionista non rispetta.
-- Sanzioni AGCM fino a 10 milioni di euro per pratiche commerciali scorrette; per violazioni di claim ambientali sanzionate ai sensi del D.Lgs. 162/2024, fino al 4% del fatturato annuo.
+DEFINIZIONI UFFICIALI introdotte (art. 1, lett. a, n-quater ss.):
+- "Asserzione ambientale": qualsiasi messaggio che asserisce o implica un impatto positivo/nullo/minore sull'ambiente rispetto ad altri prodotti o operatori, comprese rappresentazioni figurative e nomi commerciali.
+- "Asserzione ambientale generica": claim ambientale la cui specificazione non è fornita in termini chiari ed evidenti tramite lo stesso mezzo di comunicazione — vietata se non supportata da eccellenza riconosciuta delle prestazioni ambientali.
+- "Etichetta di sostenibilità": marchio volontario su caratteristiche ambientali o sociali — lecita solo se basata su sistema di certificazione accreditato o stabilita da autorità pubbliche.
+- "Eccellenza riconosciuta delle prestazioni ambientali": conformità a Ecolabel UE (Reg. CE 66/2010), sistemi nazionali/regionali ISO 14024 ufficialmente riconosciuti, o migliori prestazioni ambientali ai sensi del diritto UE.
+
+PRATICHE SEMPRE ILLECITE — art. 23 Codice del Consumo come modificato:
+- [d-bis] Formulare un'asserzione ambientale generica senza poter dimostrare l'eccellenza riconosciuta delle prestazioni ambientali pertinenti. Vietati: "sostenibile", "eco-friendly", "verde", "naturale", "a basso impatto", "rispettoso del clima", "biodegradabile", "rispettoso della natura" e qualsiasi formula equivalente, se generici e non ancorati a certificazione riconosciuta.
+- [d-ter] Formulare un'asserzione ambientale sul prodotto nel suo complesso o sull'intera attività dell'impresa quando riguarda soltanto un determinato aspetto del prodotto o uno specifico elemento dell'attività. Es.: non dire "Pantaleo è un'azienda sostenibile" basandosi solo sulla linea biologica.
+- [d-quater] Asserire, sulla base della compensazione di emissioni di gas a effetto serra, che un prodotto ha impatto neutro, ridotto o positivo sull'ambiente. Vietato: "carbon neutral", "net zero", "a emissioni zero" ottenuti tramite offset, anche se documentati.
+- [b-bis] Esibire un'etichetta di sostenibilità non basata su un sistema di certificazione accreditato o non stabilita da autorità pubbliche.
+- [l-bis] Presentare requisiti imposti per legge sul mercato UE per tutti i prodotti di una categoria come tratto distintivo dell'offerta del professionista. Questo rafforza esplicitamente il divieto già nella KB: "prima spremitura" e "spremuto a freddo" sono requisiti obbligatori per tutti gli EVO — citarli come differenzianti è illecito ai sensi di questa norma (eccezione: "estratto a freddo" per Zero, se il processo è effettivamente diverso e documentato).
+
+AZIONI INGANNEVOLI — art. 21 Codice del Consumo come modificato:
+- [b-ter] Formulare un'asserzione ambientale relativa a prestazioni ambientali FUTURE senza includere: impegni chiari, oggettivi, pubblicamente disponibili e verificabili; piano di attuazione con obiettivi misurabili e scadenze precise; verifica periodica da terzo indipendente le cui conclusioni sono messe a disposizione dei consumatori. Es.: "entro il 2030 saremo carbon neutral" senza piano pubblico e verificatore terzo è azione ingannevole.
+- [b-quater] Pubblicizzare come vantaggi per i consumatori elementi irrilevanti che non derivano dalle caratteristiche del prodotto o dell'impresa.
 
 Applicazione pratica per i testi Pantaleo:
-- "Naturale" come claim generico è potenzialmente fuorviante — non usare isolato; se necessario, ancorare a certificazione specifica (es. "biologico certificato ICEA").
-- "Sostenibile" o "ecologico" solo con riferimento esplicito a pratica documentata (es. "agricoltura biologica certificata", "150 ettari coltivati senza pesticidi di sintesi").
-- Le certificazioni Biologico ICEA, IGP, ISO 9001, Kosher, Halal sono claim legittimi — citarle sempre correttamente senza estenderle a prodotti non certificati.
-- Non usare "a km zero", "a basso impatto", "green" o simili senza prova."""
+- "Biologico certificato ICEA" → lecito: etichetta di sostenibilità basata su sistema di certificazione accreditato.
+- "IGP Olio di Puglia" → lecito: indicazione geografica protetta, solo per il prodotto certificato.
+- "Naturale", "sostenibile", "verde", "a basso impatto" generici → vietati ai sensi art. 23 d-bis.
+- "Carbon neutral", "net zero" da offset → vietati in ogni caso ai sensi art. 23 d-quater.
+- "Prima spremitura", "spremuto a freddo" come claim differenzianti → vietati ai sensi art. 23 l-bis (requisiti di legge, non differenzianti). "Estratto a freddo" per Zero rimane ammissibile solo se il processo è effettivamente specifico e documentato.
+- Claim futuri sull'ambiente → vietati senza piano pubblico, misurabile, verificato da terzo indipendente (art. 21 b-ter)."""
 
 
 class VerifyRequest(BaseModel):
