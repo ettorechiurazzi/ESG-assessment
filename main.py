@@ -65,16 +65,7 @@ RICETTE BLOG — categorie: Antipasti e zuppe, Primi, Secondi e piatti unici, Do
 
 ANTI-GREENWASHING: non usare "sostenibile" senza pratiche documentate, non inventare premi, non attribuire proprietà mediche assolute.
 
-CONFORMITÀ NORMATIVA — D.Lgs. 30/2021 (Omnibus), D.Lgs. 162/2024 (Green Claims) e Codice del Consumo aggiornato:
-
-D.Lgs. 4 febbraio 2021, n. 30 (recepimento Direttiva UE 2019/2161 "Omnibus") — modifica il Codice del Consumo D.Lgs. 206/2005:
-- REGOLA DEI 30 GIORNI (art. 17-bis Codice del Consumo): nei contenuti promozionali che comunicano una riduzione di prezzo (es. "offerta", "sconto", "prezzo speciale", "risparmia"), il prezzo di riferimento deve essere il prezzo più basso applicato nei 30 giorni precedenti. Vietato comunicare sconti calcolati su prezzi gonfiati artificialmente. Applicabile in particolare al formato Ads e Newsletter quando contengono claim di prezzo.
-- PRATICHE SEMPRE ILLECITE ampliate (nuovo Allegato I al Codice del Consumo): vietato affermare che le recensioni dei consumatori sono autentiche senza adeguate misure di verifica; vietato nascondere la natura pubblicitaria di contenuti (obbligo di trasparenza per contenuti sponsorizzati).
-- QUALITÀ DUALE (art. 6, comma 2-ter): vietato commercializzare prodotti come identici in diversi mercati UE se composizione o caratteristiche sono significativamente diverse — rilevante se la gamma Pantaleo viene comunicata a livello internazionale con claim non coerenti.
-- OMISSIONI RILEVANTI rafforzate: qualsiasi omissione di informazione materiale che il consumatore medio ha bisogno per prendere una decisione consapevole è pratica commerciale scorretta, indipendentemente dall'intenzione.
-- Sanzioni AGCM fino a 10 milioni di euro (o 4% fatturato annuo se superiore) per violazioni sistematiche.
-
-CONFORMITÀ NORMATIVA — D.Lgs. 162/2024 e Codice del Consumo aggiornato:
+CONFORMITÀ NORMATIVA — D.Lgs. 162/2024 (Green Claims) e Codice del Consumo aggiornato:
 
 D.Lgs. 162/2024 (recepimento Direttiva UE 2024/825/UE "Empowering Consumers for Green Transition") — in vigore:
 - VIETATI i claim ambientali generici privi di prova verificabile e certificazione di terza parte riconosciuta: "sostenibile", "eco-friendly", "verde", "naturale", "a basso impatto ambientale", "rispettoso del clima", "biodegradabile", "carbon neutral", "a emissioni zero", "rispettoso della natura" e locuzioni equivalenti.
