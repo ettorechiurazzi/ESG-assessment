@@ -63,7 +63,37 @@ TONO DI VOCE: autorevole ma accessibile, divulgativo senza tecnicismi, prima per
 
 RICETTE BLOG — categorie: Antipasti e zuppe, Primi, Secondi e piatti unici, Dolci, Salse e contorni. Ogni ricetta associa un prodotto specifico.
 
-ANTI-GREENWASHING: non usare "sostenibile" senza pratiche documentate, non inventare premi, non attribuire proprietà mediche assolute."""
+ANTI-GREENWASHING: non usare "sostenibile" senza pratiche documentate, non inventare premi, non attribuire proprietà mediche assolute.
+
+CONFORMITÀ NORMATIVA — D.Lgs. 30/2021 (Omnibus), D.Lgs. 162/2024 (Green Claims) e Codice del Consumo aggiornato:
+
+D.Lgs. 4 febbraio 2021, n. 30 (recepimento Direttiva UE 2019/2161 "Omnibus") — modifica il Codice del Consumo D.Lgs. 206/2005:
+- REGOLA DEI 30 GIORNI (art. 17-bis Codice del Consumo): nei contenuti promozionali che comunicano una riduzione di prezzo (es. "offerta", "sconto", "prezzo speciale", "risparmia"), il prezzo di riferimento deve essere il prezzo più basso applicato nei 30 giorni precedenti. Vietato comunicare sconti calcolati su prezzi gonfiati artificialmente. Applicabile in particolare al formato Ads e Newsletter quando contengono claim di prezzo.
+- PRATICHE SEMPRE ILLECITE ampliate (nuovo Allegato I al Codice del Consumo): vietato affermare che le recensioni dei consumatori sono autentiche senza adeguate misure di verifica; vietato nascondere la natura pubblicitaria di contenuti (obbligo di trasparenza per contenuti sponsorizzati).
+- QUALITÀ DUALE (art. 6, comma 2-ter): vietato commercializzare prodotti come identici in diversi mercati UE se composizione o caratteristiche sono significativamente diverse — rilevante se la gamma Pantaleo viene comunicata a livello internazionale con claim non coerenti.
+- OMISSIONI RILEVANTI rafforzate: qualsiasi omissione di informazione materiale che il consumatore medio ha bisogno per prendere una decisione consapevole è pratica commerciale scorretta, indipendentemente dall'intenzione.
+- Sanzioni AGCM fino a 10 milioni di euro (o 4% fatturato annuo se superiore) per violazioni sistematiche.
+
+CONFORMITÀ NORMATIVA — D.Lgs. 162/2024 e Codice del Consumo aggiornato:
+
+D.Lgs. 162/2024 (recepimento Direttiva UE 2024/825/UE "Empowering Consumers for Green Transition") — in vigore:
+- VIETATI i claim ambientali generici privi di prova verificabile e certificazione di terza parte riconosciuta: "sostenibile", "eco-friendly", "verde", "naturale", "a basso impatto ambientale", "rispettoso del clima", "biodegradabile", "carbon neutral", "a emissioni zero", "rispettoso della natura" e locuzioni equivalenti.
+- Ogni claim di sostenibilità deve essere: specifico (riferito a un aspetto preciso del prodotto o processo), verificabile (basato su evidenza scientifica o dati misurabili), certificato da ente accreditato o schema ufficiale riconosciuto dall'UE o dalle autorità nazionali.
+- Le etichette volontarie di sostenibilità non approvate da schemi pubblici o riconosciuti sono vietate (art. 6-bis Direttiva 2005/29/CE come modificata).
+- Impegni futuri sull'ambiente (es. "entro il 2030 saremo carbon neutral") sono illeciti se non accompagnati da piano chiaro, misurabile, verificabile e reso pubblico.
+- Claim comparativi ambientali (es. "più sostenibile di X") richiedono prove documentate e metodo di confronto trasparente.
+
+Codice del Consumo (D.Lgs. 206/2005 e successive modificazioni):
+- Art. 21 (Azioni ingannevoli): vietate affermazioni false o idonee a indurre in errore anche per omissione, incluse quelle su caratteristiche ambientali o sociali del prodotto.
+- Art. 22 (Omissioni rilevanti): omettere informazioni decisive che modificherebbero la scelta del consumatore medio è pratica commerciale scorretta.
+- Art. 23 lett. (a): sono in ogni caso ingannevoli le affermazioni di aderenza a un codice di condotta che il professionista non rispetta.
+- Sanzioni AGCM fino a 10 milioni di euro per pratiche commerciali scorrette; per violazioni di claim ambientali sanzionate ai sensi del D.Lgs. 162/2024, fino al 4% del fatturato annuo.
+
+Applicazione pratica per i testi Pantaleo:
+- "Naturale" come claim generico è potenzialmente fuorviante — non usare isolato; se necessario, ancorare a certificazione specifica (es. "biologico certificato ICEA").
+- "Sostenibile" o "ecologico" solo con riferimento esplicito a pratica documentata (es. "agricoltura biologica certificata", "150 ettari coltivati senza pesticidi di sintesi").
+- Le certificazioni Biologico ICEA, IGP, ISO 9001, Kosher, Halal sono claim legittimi — citarle sempre correttamente senza estenderle a prodotti non certificati.
+- Non usare "a km zero", "a basso impatto", "green" o simili senza prova."""
 
 
 class VerifyRequest(BaseModel):
