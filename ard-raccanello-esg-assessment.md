@@ -32,7 +32,10 @@ Sul prodotto, è registrata su EPD International una **EPD (EPD-IES-0019591:001)
 - Energia elettrica 100% rinnovabile [Fonte: ilnordest.it, ard-raccanello.it/we-are-green] — [Non verificato] se da autoproduzione (fotovoltaico) o da acquisto con Garanzie d'Origine
 - Consumi idrici/t: −15% (2021→2025) [Fonte: ilnordest.it — Confidence 5/10, fonte singola]
 - Riduzioni 2023 riportate da stampa: −12% energia/t, −1,25% acqua/kg, −20% emissioni dirette [Non verificato — da riscontrare sul Report 2023]
-- Emissioni GHG: la pagina "We are green" riporta un valore di **9.425 t CO₂e** senza anno di riferimento; DitchCarbon stima per il 2022 ~9.424 t CO₂e Scope 1 e ~251 t Scope 2 [Non verificato — DitchCarbon classifica erroneamente il settore, fonte poco affidabile]
+- Emissioni GHG Scope 1+2 **2024: 291,32 t CO₂** (dato riportato nella Guida Listino 2026 di ARD) [Fonte: ard-raccanello.it — Guida Listino 2026; Confidence 6/10, da riscontrare sul Sustainability Report 2024]
+- La pagina "We are green" riporta **9.425 t CO₂e** senza anno né perimetro: essendo ~30 volte il dato Scope 1+2 2024, [Inferenza] potrebbe includere lo Scope 3 o riferirsi a un perimetro diverso. DitchCarbon attribuisce ~9.424 t al solo Scope 1 2022, ma è una fonte poco affidabile (classifica erroneamente il settore) e probabilmente ha frainteso il dato [Inferenza]
+- Riduzione emissioni CO₂ −20% e consumi energetici −12% [Fonte: iferr.com, "ARD Raccanello chiude positivamente il 2024"] — baseline non chiara; il listino riporta una riduzione rispetto al 2021 con percentuale non leggibile negli estratti [Non verificato]
+- Adesione al **Climate City Contract di Padova**, con impegno alla neutralità climatica entro il 2030 [Fonte: ard-raccanello.it — Guida Listino 2026; Non verificato il perimetro dell'impegno (Scope 1+2 o anche Scope 3)]
 - Dato non disponibile pubblicamente: Scope 3 (materie prime — resine, pigmenti, TiO₂ — e logistica), quota di gamma a base acqua vs. solvente, % packaging riciclato, target di decarbonizzazione con orizzonte temporale
 
 **Lacuna critica:** in un'azienda chimica la parte rilevante dell'impronta è quasi certamente nella **catena di fornitura delle materie prime (Scope 3)** [Inferenza], non nell'elettricità. Il claim "100% rinnovabile" è corretto ma riguarda la quota minore dell'impatto: senza Scope 3 e target SBTi-like, l'Environmental rischia di apparire più forte di quanto sia nella sostanza. Inoltre, i numeri circolano senza anno e senza perimetro (es. 9.425 t CO₂e), rendendoli difficili da verificare.
@@ -52,7 +55,8 @@ C'è però un **segnale da presidiare**: nella classifica **Best Workplaces Blue
 - Formazione: 21 h/anno pro capite [Non verificato — dato aziendale ripreso dalla stampa, Confidence 5/10]
 - Great Place to Work: Top 15 Best Workplaces 2026; Blue Collar 2026: 2° → 7° [Fonte: cosedicasa.com, pmi.it]
 - [Non verificato] Riconoscimento "per il terzo anno consecutivo" e 13° posto in tabella Il Sole 24 Ore (anno non indicato)
-- Dato non disponibile pubblicamente: indici infortunistici (frequenza/gravità) — rilevanti per un'industria chimica —, gender pay gap, composizione per genere del management, turnover
+- Infortuni: 1 infortunio registrato nel 2022 su 105 dipendenti al 31/12/2022 [Fonte: Sustainability Report 2022, da estratto indicizzato]; dati 2023–2024 non reperiti
+- Dato non disponibile pubblicamente: indici infortunistici (frequenza/gravità) standardizzati — rilevanti per un'industria chimica —, gender pay gap, composizione per genere del management, turnover
 
 **Lacuna critica:** il racconto "persone" è forte ma tutto lato *employer branding*. Mancano i dati di **salute e sicurezza** (gestione sostanze pericolose, ISO 45001 non rilevata) e un racconto della **comunità di applicatori/imbianchini**, che sono gli stakeholder "sociali" più vicini al prodotto (esposizione a VOC, formazione professionale).
 
@@ -81,7 +85,7 @@ La governance della sostenibilità è stata **formalizzata a livello statutario*
 B Corp, Società Benefit, Best Workplaces, ISO 14001 sono **credenziali di organizzazione**. Chi sceglie una pittura (applicatore, progettista, consumatore finale in colorificio) valuta invece **il prodotto**: emissioni indoor, sicurezza d'uso, durata, quota di contenuto rinnovabile/riciclato. Le prove di prodotto oggi visibili sono puntuali (una EPD su ARD FILL, classe A+ dichiarata su Unique) e non sistematizzate in un'architettura di gamma leggibile. Il rischio è che il valore ESG resti "corporate" e non arrivi al punto vendita. [Inferenza]
 
 ### Gap 2 — Numeri forti, ma senza anno, perimetro e verifica
-I dati ambientali che circolano (100% rinnovabile, −15% acqua/t, −20% emissioni dirette, 9.425 t CO₂e) sono ripresi dalla stampa spesso senza anno, perimetro (sito/Scope) o fonte primaria; alcune fonti terze riportano dati incoerenti (es. DitchCarbon). Per un'azienda B Corp, l'**esposizione allo scrutinio è maggiore**: la Direttiva UE "Empowering Consumers" (2024/825) restringe i claim ambientali generici e non comprovati, con applicazione da settembre 2026. "We are green" come titolo di pagina è esattamente il tipo di claim generico da sostituire con affermazioni specifiche e documentate. [Inferenza — valutazione normativa da confermare con un legale]
+I dati ambientali che circolano (100% rinnovabile, −15% acqua/t, −20% emissioni dirette, 9.425 t CO₂e sul sito vs. 291,32 t Scope 1+2 2024 nel listino) sono ripresi dalla stampa spesso senza anno, perimetro (sito/Scope) o fonte primaria; alcune fonti terze riportano dati incoerenti (es. DitchCarbon). Per un'azienda B Corp, l'**esposizione allo scrutinio è maggiore**: la Direttiva UE "Empowering Consumers" (2024/825) restringe i claim ambientali generici e non comprovati, con applicazione da settembre 2026. "We are green" come titolo di pagina è esattamente il tipo di claim generico da sostituire con affermazioni specifiche e documentate. [Inferenza — valutazione normativa da confermare con un legale]
 
 ### Gap 3 — Comunicazione affidata soprattutto a contenuti redazionali sponsorizzati
 La visibilità consumer rilevata passa in larga parte da articoli su Cose di Casa (rubrica "Benessere a colori"), formato utile per SEO e awareness ma percepito come **autoreferenziale**. Non sono emerse metriche social (Instagram/LinkedIn) né recensioni di applicatori o consumatori finali: la percezione esterna è quasi interamente mediata da comunicati ripresi dalla stampa. [Non verificato] Assenza di presenza social strutturata — la ricerca non ha restituito dati, il che non equivale a dimostrarne l'assenza.
@@ -144,7 +148,7 @@ Comunicare cosa l'azienda ha appreso dalla survey operai 2026 e le azioni conseg
 ### Strategic Gaps (investimento 12-36 mesi)
 
 **SG1 — Inventario Scope 3 e target di decarbonizzazione**
-Misurare lo Scope 3 (materie prime — leganti, pigmenti, biossido di titanio — packaging, logistica, fine vita) e fissare target con orizzonte temporale (es. allineamento SBTi). È il passaggio che porta l'Environmental da "Solid" a "Leader" e risponde alle richieste dei grandi clienti B2B e dei protocolli green building. [Inferenza: lo Scope 3 è con ogni probabilità la quota dominante dell'impronta]
+Rendere esplicito come l'impegno di neutralità climatica 2030 (Climate City Contract di Padova) tratta lo Scope 3. Misurare lo Scope 3 (materie prime — leganti, pigmenti, biossido di titanio — packaging, logistica, fine vita) e fissare target con orizzonte temporale (es. allineamento SBTi). È il passaggio che porta l'Environmental da "Solid" a "Leader" e risponde alle richieste dei grandi clienti B2B e dei protocolli green building. [Inferenza: lo Scope 3 è con ogni probabilità la quota dominante dell'impronta]
 
 **SG2 — Programma EPD/LCA di gamma**
 Estendere le EPD dalle referenze singole alle linee principali (Ardtop, Unique, Domotica, Idrosana), valorizzando la competenza LCA interna già dimostrata. Abilita la partecipazione a gare pubbliche con CAM edilizia e capitolati LEED/BREEAM.
@@ -199,6 +203,9 @@ L'opportunità è costruire un territorio ESG centrato sulla **salute lungo tutt
 - [DIY and Garden — Certificazione ISO 14001 a Ard Raccanello](https://diyandgarden.com/produzione/ard-raccanello-ottiene-la-certificazione-iso-14001/)
 - [ARD Raccanello — Sustainability Report 2023 (PDF)](https://www.ard-raccanello.it/app/uploads/2025/03/SUSTAINABILITY_REPORT_2023_LOW.pdf)
 - [ARD Raccanello — Sustainability Report 2022 (PDF)](https://www.ard-raccanello.it/app/uploads/2024/02/SUSTAINABILITY_REPORT_definitivo_LOW.pdf)
+- [ARD Raccanello — Guida Listino 2026 (PDF)](https://www.ard-raccanello.it/app/uploads/2025/02/Guida_Listino_2026_v2_low.pdf)
+- [iFerr — ARD Raccanello chiude positivamente il 2024](https://iferr.com/ard-raccanello-chiude-positivamente-il-2024/)
+- [ARD Raccanello — Sustainability Report 2024 (PDF, non letto: dominio non raggiungibile)](https://www.ard-raccanello.it/app/uploads/2026/05/SUSTAINABILITY_REPORT_2024_digitale97.pdf)
 - [ARD Raccanello — We are green](https://www.ard-raccanello.it/en/we-are-green/)
 - [ARD Raccanello — The ethic leadership: Luigi Gorza for Corriere della Sera](https://www.ard-raccanello.it/en/news-press/the-ethic-leadership-luigi-gorza-for-corriere-della-sera/)
 - [EPD International — EPD-IES-0019591 (ARD FILL)](https://www.environdec.com/library/epd19591)
